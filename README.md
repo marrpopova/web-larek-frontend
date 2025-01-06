@@ -117,6 +117,6 @@ yarn build
     
 Методы:  
 
-``` renderStep(step) ``` — показывает текущий шаг оформления.  
+``` renderStep(step) ``` — отображает текущий шаг оформления.  
 
 ```setFormSubmitHandler(handler)``` — обрабатывает отправку формы.
