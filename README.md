@@ -80,4 +80,12 @@ npm run build
 ```
 yarn build
 ```
+## Данные (Model)  
+### Класс Product
+Содержит данные карточек товара.  
+
+Поля:  
+  name: string // Название товара  
+  description: string // Описание товара
+
 
