@@ -86,6 +86,7 @@ yarn build
 
 Поля:  
   name: string // Название товара  
+  id: string; // Айди товара
   description: string // Описание товара  
   price: number // Цена товара  
   category: string // Категория товара  
@@ -97,6 +98,7 @@ yarn build
 Поля:  
   email: string // Почта покупателя  
   phone: string // Телефон покупателя  
+  
 ### Order
 Содержит данные для заказа.  
 
@@ -110,3 +112,42 @@ yarn build
 Поля:  
   product: Product;  
   quantity: number // Кол-во товаров
+ 
+## Model
+### ProductModel  
+Назначение: Управляет данными товаров, полученными с сервера.  
+Свойства: _products: Product[] // Список товаров  
+Конструктор: -  
+Методы:  
+fetchProducts(): Promise<void>  
+getProductById(id: string): Product | null // Возращает данные товара по айди  
+### CartModel  
+Назначение: Управляет данными корзины.
+Свойства: _cartItems: CartItem[] // Массив товаров в корзине  
+Конструктор: -  
+Методы:  
+addToCart(product: Product): void // Добваляет товар в корзину(параметрs: объект товара)  
+removeFromCart(productId: string): void // Удаляет товар из корзины(параметры: айди товара)  
+getCartItems(): CartItem[] // Возращает массив товаров в корзине.  
+clearCart(): void // Очищает корзину.  
+### OrderModel  
+Назначение: Управляет процессом оформления заказа.  
+Свойства:  
+_deliveryAddress: string | null // Адрес доставки  
+_paymentMethod: string | null // Способ оплаты  
+_contactInfo : ContactInfo | null // Контактные данные покупателя  
+Конструктор: -  
+Методы:  
+setDeliveryAddres(address: string): void // Устанавливает адрес доставки  
+setPaymentMethod(method: string): void // Устанавливает способ оплаты  
+setContactInfo(email: string, phone: string): void // Сохраняет контактную информацию  
+submitOrder(): Promise<void> // Отправляет данные заказа на сервер  
+## View  
+### ProductView<T>
+Назначение: Отвечает за отображение списка товаров.  
+Свойства: _container: HTMLElement // Элемент DOM списка товаров  
+Конструктор: _container: HTMLElement // Контейнер для отображения товаров
+Методы:  
+render(products: T[]): void // Отображает список товаров(параметры: массив объектов товаров)  
+showProductDetails(product: T): void // Отображает информацию о выбранном товаре в модальном окне.(параметры: объект товара)  
+
