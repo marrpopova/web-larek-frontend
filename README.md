@@ -81,11 +81,32 @@ npm run build
 yarn build
 ```
 ## Данные (Model)  
-### Класс Product
+### Product
 Содержит данные карточек товара.  
 
 Поля:  
   name: string // Название товара  
-  description: string // Описание товара
-  price: string // Цена товара
+  description: string // Описание товара  
+  price: number // Цена товара  
+  category: string // Категория товара  
+  image: string // Ссылка на изображение товара 
 
+### ContactInfo
+Содержит контактные данные покупателя.  
+
+Поля:  
+  email: string // Почта покупателя  
+  phone: string // Телефон покупателя  
+### Order
+Содержит данные для заказа.  
+
+Поля:  
+  deliveryAddress: string // Адрес доставки  
+  paymentMethod: string // Способ оплаты  
+  contactInfo: ContactInfo  
+### CartItem
+Содержит данные элемента корзины.  
+
+Поля:  
+  product: Product;  
+  quantity: number // Кол-во товаров
