@@ -87,5 +87,5 @@ yarn build
 Поля:  
   name: string // Название товара  
   description: string // Описание товара
-
+  price: string // Цена товара
 
