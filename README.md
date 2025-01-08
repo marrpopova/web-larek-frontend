@@ -122,7 +122,7 @@ yarn build
 fetchProducts(): Promise<void>  
 getProductById(id: string): Product | null // Возращает данные товара по айди  
 ### CartModel  
-Назначение: Управляет данными корзины.
+Назначение: Управляет данными корзины.  
 Свойства: _cartItems: CartItem[] // Массив товаров в корзине  
 Конструктор: -  
 Методы:  
