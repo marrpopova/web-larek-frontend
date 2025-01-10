@@ -81,7 +81,7 @@ npm run build
 yarn build
 ```
 ## Типы данных 
-### Product
+### ```Product```
 Содержит данные карточек товара.  
 
 Поля:  
@@ -92,21 +92,21 @@ yarn build
   category: string // Категория товара  
   image: string // Ссылка на изображение товара 
 
-### ContactInfo
+### ```ContactInfo```
 Содержит контактные данные покупателя.  
 
 Поля:  
   email: string // Почта покупателя  
   phone: string // Телефон покупателя  
   
-### Order
+### ```Order```
 Содержит данные для заказа.  
 
 Поля:  
   deliveryAddress: string // Адрес доставки  
   paymentMethod: string // Способ оплаты  
   contactInfo: ContactInfo  
-### CartItem
+### ```CartItem```
 Содержит данные элемента корзины.  
 
 Поля:  
@@ -114,13 +114,13 @@ yarn build
   quantity: number // Кол-во товаров
  
 ## Model
-### ProductModel  
+### ```ProductModel```  
 Назначение: Управляет данными товаров, полученными с сервера.  
-Свойства: _products: Product[] // Список товаров  
+Свойства: ```_products: Product[]``` // Список товаров  
 Конструктор: -  
 Методы:  
-fetchProducts(): Promise<void>  
-getProductById(id: string): Product | null // Возращает данные товара по айди  
+```fetchProducts(): Promise<void> ``` 
+```getProductById(id: string): Product | null``` // Возращает данные товара по айди  
 ### CartModel  
 Назначение: Управляет данными корзины.  
 Свойства: _cartItems: CartItem[] // Массив товаров в корзине  
