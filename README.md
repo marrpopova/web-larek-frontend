@@ -85,33 +85,33 @@ yarn build
 Содержит данные карточек товара.  
 
 Поля:  
-  name: string // Название товара  
-  id: string; // Айди товара
-  description: string // Описание товара  
-  price: number // Цена товара  
-  category: string // Категория товара  
-  image: string // Ссылка на изображение товара 
+  ```name: string``` // Название товара  
+  ```id: string;``` // Айди товара
+  ```description: string``` // Описание товара  
+  ```price: number``` // Цена товара  
+  ```category: string``` // Категория товара  
+  ```image: string``` // Ссылка на изображение товара 
 
 ### ```ContactInfo```
 Содержит контактные данные покупателя.  
 
 Поля:  
-  email: string // Почта покупателя  
-  phone: string // Телефон покупателя  
+  ```email: string``` // Почта покупателя  
+  ```phone: string``` // Телефон покупателя  
   
 ### ```Order```
 Содержит данные для заказа.  
 
 Поля:  
-  deliveryAddress: string // Адрес доставки  
-  paymentMethod: string // Способ оплаты  
-  contactInfo: ContactInfo  
+  ```deliveryAddress: string``` // Адрес доставки  
+  ```paymentMethod: string``` // Способ оплаты  
+  ```contactInfo: ContactInfo```  
 ### ```CartItem```
 Содержит данные элемента корзины.  
 
 Поля:  
-  product: Product;  
-  quantity: number // Кол-во товаров
+  ```product: Product;```  
+  ```quantity: number``` // Кол-во товаров
  
 ## Model
 ### ```ProductModel```  
@@ -121,74 +121,74 @@ yarn build
 Методы:  
 ```fetchProducts(): Promise<void> ``` 
 ```getProductById(id: string): Product | null``` // Возращает данные товара по айди  
-### CartModel  
+### ```CartModel```  
 Назначение: Управляет данными корзины.  
-Свойства: _cartItems: CartItem[] // Массив товаров в корзине  
+Свойства: ```_cartItems: CartItem[]``` // Массив товаров в корзине  
 Конструктор: -  
 Методы:  
-addToCart(product: Product): void // Добваляет товар в корзину(параметрs: объект товара)  
-removeFromCart(productId: string): void // Удаляет товар из корзины(параметры: айди товара)  
-getCartItems(): CartItem[] // Возращает массив товаров в корзине.  
-clearCart(): void // Очищает корзину.  
+```addToCart(product: Product): void``` // Добваляет товар в корзину(параметрs: объект товара)  
+```removeFromCart(productId: string): void``` // Удаляет товар из корзины(параметры: айди товара)  
+```getCartItems(): CartItem[]``` // Возращает массив товаров в корзине.  
+```clearCart(): void``` // Очищает корзину.  
 ### OrderModel  
 Назначение: Управляет процессом оформления заказа.  
 Свойства:  
-_deliveryAddress: string | null // Адрес доставки  
-_paymentMethod: string | null // Способ оплаты  
-_contactInfo : ContactInfo | null // Контактные данные покупателя  
+```_deliveryAddress: string | null``` // Адрес доставки  
+```_paymentMethod: string | null``` // Способ оплаты  
+```_contactInfo : ContactInfo | null``` // Контактные данные покупателя  
 Конструктор: -  
 Методы:  
-setDeliveryAddres(address: string): void // Устанавливает адрес доставки  
-setPaymentMethod(method: string): void // Устанавливает способ оплаты  
-setContactInfo(email: string, phone: string): void // Сохраняет контактную информацию  
-submitOrder(): Promise<void> // Отправляет данные заказа на сервер  
+```setDeliveryAddres(address: string): void``` // Устанавливает адрес доставки  
+```setPaymentMethod(method: string): void``` // Устанавливает способ оплаты  
+```setContactInfo(email: string, phone: string): void``` // Сохраняет контактную информацию  
+```submitOrder(): Promise<void>``` // Отправляет данные заказа на сервер  
 ## View  
-### Component<T>  
+### ```Component<T>```  
 Назначение: Базовый класс для всех компонентов интерфейса. Обеспечивает общие методы для управления DOM-элементами.  
 Свойства:  
-rootElement: HTMLElement // Корневой DOM-элемент компонента.  
-data?: T // Данные, которые нужно отразить.  
+```rootElement: HTMLElement``` // Корневой DOM-элемент компонента.  
+```data?: T``` // Данные, которые нужно отразить.  
 Методы:  
-setTextContent(selector: string, text: string): void // Устанавливает текстовое содержимое для дочернего элемента.  
-toggleClass(selector: string, className: string, add: boolean): void // Добавляет или удаляет CSS-класс у дочернего элемента.  
-setAttribute(selector: string, attribute: string, value: string): void // Устанавливает атрибут DOM-элемента.  
-addEventListener(selector: string, event: string, callback: EventListener): void // Добавляет слушатель события на дочерний элемент.
-### ProductView<T>
+```setTextContent(selector: string, text: string): void``` // Устанавливает текстовое содержимое для дочернего элемента.  
+```toggleClass(selector: string, className: string, add: boolean): void``` // Добавляет или удаляет CSS-класс у дочернего элемента.  
+```setAttribute(selector: string, attribute: string, value: string): void``` // Устанавливает атрибут DOM-элемента.  
+```addEventListener(selector: string, event: string, callback: EventListener): void``` // Добавляет слушатель события на дочерний элемент.
+### ```ProductView<T>```
 Назначение: Отвечает за отображение списка товаров. Унаследован от Component.  
-Свойства: product: Product[] // Список товаров  
-Конструктор: rootElement: HTMLElement // Контейнер для отображения товаров
+Свойства: ```product: Product[]``` // Список товаров  
+Конструктор: ```rootElement: HTMLElement``` // Контейнер для отображения товаров
 Методы:  
-render(products: Product[]): void // Отображает список товаров(параметры: массив объектов товаров)  
-showProductDetails(product: Product): void // Отображает информацию о выбранном товаре в модальном окне.(параметры: объект товара)  
-### CardView<T>  
+```render(products: Product[]): void``` // Отображает список товаров(параметры: массив объектов товаров)  
+```showProductDetails(product: Product): void``` // Отображает информацию о выбранном товаре в модальном окне.(параметры: объект товара)  
+### ```CardView<T>```  
 Назначение: Отвечает за отображение корзины. Унаследован от Component.   
-Конструктор: rootElement: HTMLElement
+Конструктор: ```rootElement: HTMLElement```
 Методы:  
-render(cartItems: cartItem[]): void // Отображает список товаров в корзине  
-showCart(): void // Открывает модальное окно корзины  
-hideCart(): void // Закрывает модальное окно корзины  
-### OrderView<T>  
+```render(cartItems: cartItem[]): void``` // Отображает список товаров в корзине  
+```showCart(): void``` // Открывает модальное окно корзины  
+```hideCart(): void``` // Закрывает модальное окно корзины  
+### ```OrderView<T>```  
 Назначение: Отвечает за отображение процесса оформления заказа  
-Конструктор: rootElement: HTMLElement // Контейнер для отображения формы заказа
+Конструктор: ```rootElement: HTMLElement``` // Контейнер для отображения формы заказа
 Методы:  
-renderStep(step: string): void // Отображает сообщение об ошибке  
-showError(message: string): void // Отображает сообщение об ошибке  
-showSuccess(): void // Отображает сообщение об успешной оплате  
+```renderStep(step: string): void``` // Отображает сообщение об ошибке  
+```showError(message: string): void``` // Отображает сообщение об ошибке  
+```showSuccess(): void``` // Отображает сообщение об успешной оплате  
 ## Presenter  
-### AppPresenter  
+### ```AppPresenter```  
 Назначение: Связывает модели и представления.  
 Свойства:  
-_productModel: ProductModel  
-_cartModel: CartModel  
-_orderModel: OrderModel  
-_productView: ProductView<Product>  
-_cartView: CartView<CartItem>  
-_orderView: OrderView<Order>  
-Констркутор: productModel: ProductModel, cartModel: CartModel, orderModel: OrderModel, productView: ProductView<Product>, cartView: CartView<CartItem>, orderView: OrderView<Order>  
+```_productModel: ProductModel```  
+```_cartModel: CartModel```  
+```_orderModel: OrderModel```  
+```_productView: ProductView<Product>```  
+```_cartView: CartView<CartItem>```  
+```_orderView: OrderView<Order>```  
+Констркутор: ```productModel: ProductModel, cartModel: CartModel, orderModel: OrderModel, productView: ProductView<Product>, cartView: CartView<CartItem>, orderView: OrderView<Order>```  
 Методы:  
-initialize(): void // Инициализирует приложение, загружает данные  
-handleAddToCart(productId: string): void // Добавляет товар в корзину  
-handleRemoveFromCart(productId: string): void // Удаляет товар из корзины  
-handleOrderSubmission(): void // Отправляет заказ  
-### EventEmitter<T>
+```initialize(): void``` // Инициализирует приложение, загружает данные  
+```handleAddToCart(productId: string): void``` // Добавляет товар в корзину  
+```handleRemoveFromCart(productId: string): void``` // Удаляет товар из корзины  
+```handleOrderSubmission(): void``` // Отправляет заказ  
+### ```EventEmitter<T>```
 Назначение: Управляет событиями в приложении, позволяет подписываться на события и вызывать их.
