@@ -119,7 +119,7 @@ yarn build
 Свойства: ```_products: Product[]``` // Список товаров  
 Конструктор: -  
 Методы:  
-```fetchProducts(): Promise<void> ``` 
+```fetchProducts(): Promise<void> ```   
 ```getProductById(id: string): Product | null``` // Возращает данные товара по айди  
 ### CartModel  
 Назначение: Управляет данными корзины.  
