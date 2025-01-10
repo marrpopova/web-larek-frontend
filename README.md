@@ -86,7 +86,7 @@ yarn build
 
 Поля:  
   ```name: string``` // Название товара  
-  ```id: string;``` // Айди товара
+  ```id: string;``` // Айди товара  
   ```description: string``` // Описание товара  
   ```price: number``` // Цена товара  
   ```category: string``` // Категория товара  
