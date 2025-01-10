@@ -81,7 +81,7 @@ npm run build
 yarn build
 ```
 ## Типы данных 
-### ```Product```
+### Product
 Содержит данные карточек товара.  
 
 Поля:  
@@ -92,21 +92,21 @@ yarn build
   ```category: string``` // Категория товара  
   ```image: string``` // Ссылка на изображение товара 
 
-### ```ContactInfo```
+### ContactInfo
 Содержит контактные данные покупателя.  
 
 Поля:  
   ```email: string``` // Почта покупателя  
   ```phone: string``` // Телефон покупателя  
   
-### ```Order```
+### Order
 Содержит данные для заказа.  
 
 Поля:  
   ```deliveryAddress: string``` // Адрес доставки  
   ```paymentMethod: string``` // Способ оплаты  
   ```contactInfo: ContactInfo```  
-### ```CartItem```
+### CartItem
 Содержит данные элемента корзины.  
 
 Поля:  
@@ -114,14 +114,14 @@ yarn build
   ```quantity: number``` // Кол-во товаров
  
 ## Model
-### ```ProductModel```  
+### ProductModel  
 Назначение: Управляет данными товаров, полученными с сервера.  
 Свойства: ```_products: Product[]``` // Список товаров  
 Конструктор: -  
 Методы:  
 ```fetchProducts(): Promise<void> ``` 
 ```getProductById(id: string): Product | null``` // Возращает данные товара по айди  
-### ```CartModel```  
+### CartModel  
 Назначение: Управляет данными корзины.  
 Свойства: ```_cartItems: CartItem[]``` // Массив товаров в корзине  
 Конструктор: -  
@@ -143,7 +143,7 @@ yarn build
 ```setContactInfo(email: string, phone: string): void``` // Сохраняет контактную информацию  
 ```submitOrder(): Promise<void>``` // Отправляет данные заказа на сервер  
 ## View  
-### ```Component<T>```  
+### Component<T>  
 Назначение: Базовый класс для всех компонентов интерфейса. Обеспечивает общие методы для управления DOM-элементами.  
 Свойства:  
 ```rootElement: HTMLElement``` // Корневой DOM-элемент компонента.  
@@ -153,29 +153,29 @@ yarn build
 ```toggleClass(selector: string, className: string, add: boolean): void``` // Добавляет или удаляет CSS-класс у дочернего элемента.  
 ```setAttribute(selector: string, attribute: string, value: string): void``` // Устанавливает атрибут DOM-элемента.  
 ```addEventListener(selector: string, event: string, callback: EventListener): void``` // Добавляет слушатель события на дочерний элемент.
-### ```ProductView<T>```
+### ProductView<T>
 Назначение: Отвечает за отображение списка товаров. Унаследован от Component.  
 Свойства: ```product: Product[]``` // Список товаров  
-Конструктор: ```rootElement: HTMLElement``` // Контейнер для отображения товаров
+Конструктор: ```rootElement: HTMLElement``` // Контейнер для отображения товаров  
 Методы:  
 ```render(products: Product[]): void``` // Отображает список товаров(параметры: массив объектов товаров)  
 ```showProductDetails(product: Product): void``` // Отображает информацию о выбранном товаре в модальном окне.(параметры: объект товара)  
-### ```CardView<T>```  
+### CardView<T>  
 Назначение: Отвечает за отображение корзины. Унаследован от Component.   
-Конструктор: ```rootElement: HTMLElement```
+Конструктор: ```rootElement: HTMLElement```  
 Методы:  
 ```render(cartItems: cartItem[]): void``` // Отображает список товаров в корзине  
 ```showCart(): void``` // Открывает модальное окно корзины  
 ```hideCart(): void``` // Закрывает модальное окно корзины  
-### ```OrderView<T>```  
+### OrderView<T>  
 Назначение: Отвечает за отображение процесса оформления заказа  
-Конструктор: ```rootElement: HTMLElement``` // Контейнер для отображения формы заказа
+Конструктор: ```rootElement: HTMLElement``` // Контейнер для отображения формы заказа  
 Методы:  
 ```renderStep(step: string): void``` // Отображает сообщение об ошибке  
 ```showError(message: string): void``` // Отображает сообщение об ошибке  
 ```showSuccess(): void``` // Отображает сообщение об успешной оплате  
 ## Presenter  
-### ```AppPresenter```  
+### AppPresenter  
 Назначение: Связывает модели и представления.  
 Свойства:  
 ```_productModel: ProductModel```  
@@ -190,5 +190,5 @@ yarn build
 ```handleAddToCart(productId: string): void``` // Добавляет товар в корзину  
 ```handleRemoveFromCart(productId: string): void``` // Удаляет товар из корзины  
 ```handleOrderSubmission(): void``` // Отправляет заказ  
-### ```EventEmitter<T>```
+### EventEmitter<T>
 Назначение: Управляет событиями в приложении, позволяет подписываться на события и вызывать их.
