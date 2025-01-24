@@ -83,11 +83,11 @@ events.on('preview:change', (item: IProduct) => {
 	modal.render({ content: card.render(item) });
 });
 
-events.on('basket:change', () => {
+events.on('cart:change', () => {
 	page.counter = appData.cart.products.length;
 	cart.items = appData.cart.products.map((id) => {
 		const item = appData.items.find((item) => item.id === id);
-		const card = new Card(cloneTemplate(cardCartTemplate), {
+		const card = new Card(cloneTemplate(cardCartTemplate), { 
 			onClick: () => appData.removeFromCart(item),
 		});
 		return card.render(item);
@@ -109,7 +109,7 @@ events.on('order:open', () => {
 	modal.render({
 		content: orderForm.render({
 			paymentMethod: 'card',
-			deliveryAddress: '',
+			address: '',
 			valid: false,
 			errors: []
 		}),
@@ -128,6 +128,29 @@ events.on('order:submit', () => {
 	});
 });
 
+// Изменилось состояние валидации формы
+events.on('orderFormErrors:change', (errors: Partial<IOrder>) => {
+	const { address: address } = errors;
+	const formIsValid = !address;
+	orderForm.valid = formIsValid;
+	if (!formIsValid) {
+		orderForm.errors = address;
+	} else {
+		orderForm.errors = '';
+	}
+});
+
+events.on('contactsFormErrors:change', (errors: Partial<IOrder>) => {
+	const { email, phone } = errors;
+	const formIsValid = !email && !phone;
+	contactsForm.valid = formIsValid;
+	if (!formIsValid) {
+		contactsForm.errors = email || phone;
+	} else {
+		contactsForm.errors = '';
+	}
+});
+
 // Изменилось одно из полей
 events.on(
 	/^order\..*:change/, (data: { field: keyof IOrder; value: string }) => {
@@ -137,34 +160,11 @@ events.on(
 );
 
 events.on(
-	/^contacts\..*:change$/, (data: { field: keyof IOrder; value: string }) => {
+	/^contacts\..*:change/, (data: { field: keyof IOrder; value: string }) => {
 		appData.setOrderField(data.field, data.value);
 		appData.validateContactsForm();
 	}
 );
-
-// Изменилось состояние валидации формы
-events.on('orderFormErrors:change', (error: Partial<IOrder>) => {
-	const { paymentMethod, deliveryAddress } = error;
-	const formIsValid = !paymentMethod && !deliveryAddress;
-	orderForm.valid = formIsValid;
-	if (!formIsValid) {
-		orderForm.errorss = deliveryAddress;
-	} else {
-		orderForm.errorss = '';
-	}
-});
-
-events.on('contactsFormErrors:change', (error: Partial<IOrder>) => {
-	const { email, phone } = error;
-	const formIsValid = !email && !phone;
-	contactsForm.valid = formIsValid;
-	if (!formIsValid) {
-		contactsForm.errorss = email || phone;
-	} else {
-		contactsForm.errorss = '';
-	}
-});
 
 // Отправлена форма контактной информации
 events.on('contacts:submit', () => {

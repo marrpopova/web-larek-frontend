@@ -14,7 +14,7 @@ export interface ICartItem {
 };
   
 export interface IOrder {
-    deliveryAddress: string;
+    address: string;
     paymentMethod: 'cash' | 'card';
     email: string;
     phone: string;

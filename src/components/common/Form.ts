@@ -9,13 +9,13 @@ interface IFormState {
 
 export class Form<T> extends View<IFormState> {
     protected _submit: HTMLButtonElement;
-    protected _errorss: HTMLElement;
+    protected _errors: HTMLElement;
 
     constructor(protected container: HTMLFormElement, protected events: IEvents) {
         super(container, events);
 
         this._submit = ensureElement<HTMLButtonElement>('button[type=submit]', this.container);
-        this._errorss = ensureElement<HTMLElement>('.form__errorss', this.container);
+        this._errors = ensureElement<HTMLElement>('.form__errors', this.container);
         
         this.container.addEventListener('input', (event: Event) => {
             const target = event.target as HTMLInputElement;
@@ -36,8 +36,8 @@ export class Form<T> extends View<IFormState> {
         this._submit.disabled = !value;
     }
 
-    set errorss(value: string) {
-        this.setText(this._errorss, value);
+    set errors(value: string) {
+        this.setText(this._errors, value);
     }
 
     render(state: Partial<T> & IFormState) {
@@ -45,6 +45,5 @@ export class Form<T> extends View<IFormState> {
         super.render({valid, errors});
         Object.assign(this, inputs);
         return this.container;
-
     }
 }

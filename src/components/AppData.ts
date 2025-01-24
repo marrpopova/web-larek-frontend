@@ -19,7 +19,7 @@ export class AppData extends EventEmitter implements IAppData {
         quantity: 0,
     };
     order: IOrder = {
-        deliveryAddress: '',
+        address: '',
         paymentMethod: 'card',
         email: '',
         phone: '',
@@ -30,8 +30,8 @@ export class AppData extends EventEmitter implements IAppData {
 		super()
 	}
 
-    setItems() {
-        this.items = this.items;
+    setItems(items: IProduct[]) {
+        this.items = items;
         this.events.emit('items:change', this.items);
     }
 
@@ -76,8 +76,8 @@ export class AppData extends EventEmitter implements IAppData {
 
     validateOrderForm() {
 		const errors: typeof this.formErrors = {};
-		if (!this.order.deliveryAddress) {
-			errors.deliveryAddress = 'Необходимо указать адрес';
+		if (!this.order.address) {
+			errors.address = 'Необходимо указать адрес';
 		}
 		this.formErrors = errors;
 		this.events.emit('orderFormErrors:change', this.formErrors);
@@ -99,10 +99,11 @@ export class AppData extends EventEmitter implements IAppData {
 
     clearOrder() {
 		this.order = {
-			deliveryAddress: '',
+			address: '',
             paymentMethod: 'card',
             email: '',
             phone: '',
 		};
+		this.events.emit('order:clear')
 	}
 }

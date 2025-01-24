@@ -10,12 +10,13 @@ export class Modal extends View<IModalDate> {
     protected _closeButton: HTMLButtonElement;
     protected _content: HTMLElement;
 
-    constructor (container: HTMLElement, protected events: IEvents) {
+    constructor(container: HTMLElement, protected events: IEvents) {
         super(container, events);
+
         this._closeButton= ensureElement<HTMLButtonElement>('.modal__close', container);
         this._content = ensureElement<HTMLElement>('.modal__content', container);
         this._closeButton.addEventListener('click', this.closeModal.bind(this));
-        this._content.addEventListener('click', this.closeModal.bind(this)); 
+        this.container.addEventListener('click', this.closeModal.bind(this)); 
         this._content.addEventListener('click', (event) => event.stopPropagation());
     }
     
@@ -30,7 +31,7 @@ export class Modal extends View<IModalDate> {
 
     closeModal() {
         this.container.classList.toggle('modal_active', false);
-        this._content=null;
+        this._content.innerHTML='';
         this.events.emit('modal:close')
     }
 
