@@ -9,13 +9,13 @@ export interface IProduct {
 };
   
 export interface ICartItem {
-    products: string[];
-    quantity: number;
+    items: string[];
+    total: number;
 };
   
 export interface IOrder {
     address: string;
-    paymentMethod: 'cash' | 'card';
+    payment: 'cash' | 'card';
     email: string;
     phone: string;
 };

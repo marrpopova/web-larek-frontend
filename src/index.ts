@@ -84,8 +84,8 @@ events.on('preview:change', (item: IProduct) => {
 });
 
 events.on('cart:change', () => {
-	page.counter = appData.cart.products.length;
-	cart.items = appData.cart.products.map((id) => {
+	page.counter = appData.cart.items.length;
+	cart.items = appData.cart.items.map((id) => {
 		const item = appData.items.find((item) => item.id === id);
 		const card = new Card(cloneTemplate(cardCartTemplate), { 
 			onClick: () => appData.removeFromCart(item),
@@ -93,7 +93,7 @@ events.on('cart:change', () => {
 		return card.render(item);
 	});
 
-	cart.price = appData.cart.quantity;
+	cart.price = appData.cart.total;
 });
 
 // Открыть закрытые лоты
@@ -108,7 +108,7 @@ events.on('order:open', () => {
 	appData.clearOrder();
 	modal.render({
 		content: orderForm.render({
-			paymentMethod: 'card',
+			payment: 'card',
 			address: '',
 			valid: false,
 			errors: []
@@ -130,8 +130,8 @@ events.on('order:submit', () => {
 
 // Изменилось состояние валидации формы
 events.on('orderFormErrors:change', (errors: Partial<IOrder>) => {
-	const { address: address } = errors;
-	const formIsValid = !address;
+	const { payment, address: address } = errors;
+	const formIsValid = !payment && !address;
 	orderForm.valid = formIsValid;
 	if (!formIsValid) {
 		orderForm.errors = address;

@@ -15,12 +15,12 @@ export class AppData extends EventEmitter implements IAppData {
     items: IProduct[] = [];
     preview: IProduct | null = null;
     cart: ICartItem = {
-        products: [],
-        quantity: 0,
+        items: [],
+        total: 0,
     };
     order: IOrder = {
         address: '',
-        paymentMethod: 'card',
+        payment: 'card',
         email: '',
         phone: '',
     }
@@ -41,37 +41,38 @@ export class AppData extends EventEmitter implements IAppData {
 	}
 
 	isInCart(item: IProduct) {
-		return this.cart.products.includes(item.id);
+		return this.cart.items.includes(item.id);
 	}
 
 	addToCart(item: IProduct) {
-		this.cart.products.push(item.id);
-		this.cart.quantity += item.price;
+		this.cart.items.push(item.id);
+		this.cart.total += item.price;
 		this.events.emit('cart:change', this.cart);
 	}
 
 	removeFromCart(item: IProduct) {
-		this.cart.products = this.cart.products.filter((id) => id !== item.id);
-		this.cart.quantity -= item.price;
+		this.cart.items = this.cart.items.filter((id) => id !== item.id);
+		this.cart.total -= item.price;
 		this.events.emit('cart:change', this.cart);
 	}
 
 	clearCart() {
-		this.cart.products = [];
-		this.cart.quantity = 0;
+		this.cart.items = [];
+		this.cart.total = 0;
 		this.events.emit('cart:change');
 	}
 
 	setPaymentMethod(method: 'cash' | 'card') {
-		this.order.paymentMethod = method;
+		this.order.payment = method;
 	}
 
 	setOrderField(field: keyof IOrder, value: string) {
-		if (field === 'paymentMethod') {
+		if (field === 'payment') {
 			this.setPaymentMethod(value as 'cash' | 'card');
 		} else {
 			this.order[field] = value
 		}
+	
 	}
 
     validateOrderForm() {
@@ -100,7 +101,7 @@ export class AppData extends EventEmitter implements IAppData {
     clearOrder() {
 		this.order = {
 			address: '',
-            paymentMethod: 'card',
+            payment: 'card',
             email: '',
             phone: '',
 		};
