@@ -56,7 +56,7 @@ export class Card extends Component<IProduct> {
 	set price(value: string) {
 		this.setText(this._price, value ? `${value} синапсов` : 'Бесценно');
 		if (this._button) {
-			this._button.disabled = !value;
+			this.setDisabled(this._button, !value);
 		}
 	}
 	get price(): string {
@@ -65,7 +65,8 @@ export class Card extends Component<IProduct> {
 	set category(value: string) {
 		this.setText(this._category, value);
 		if (this._category) {
-			this._category.classList.add(`card__category_${categories.get(value) ? categories.get(value) : 'other'}`);
+			const categoryClass = `card__category_${categories.get(value) ? categories.get(value) : 'other'}`;
+			this.toggleClass(this._category, categoryClass, true);
 		}
 	}
 	get category(): string {

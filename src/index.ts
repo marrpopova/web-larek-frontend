@@ -8,7 +8,7 @@ import { ProductView } from './components/ProductView'
 import { Cart } from './components/Cart';
 import { OrderForm } from './components/OrderForm';
 import { ContactsForm } from './components/ContactsForm';
-import { Success } from './components/common/Success';
+import { Success } from './components/Success';
 import { AppData } from './components/AppData';
 import { IOrder, IProduct } from './types';
 import { Card } from './components/Card';
@@ -85,14 +85,15 @@ events.on('preview:change', (item: IProduct) => {
 
 events.on('cart:change', () => {
 	page.counter = appData.cart.items.length;
-	cart.items = appData.cart.items.map((id) => {
+	
+	cart.items = appData.cart.items.map((id, index) => {
 		const item = appData.items.find((item) => item.id === id);
 		const card = new Card(cloneTemplate(cardCartTemplate), { 
 			onClick: () => appData.removeFromCart(item),
 		});
-		return card.render(item);
+		
+		return card.render({title: item.title, price: item.price, index: index + 1});
 	});
-
 	cart.price = appData.cart.total;
 });
 

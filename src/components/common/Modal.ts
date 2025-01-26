@@ -25,12 +25,12 @@ export class Modal extends View<IModalDate> {
     }
 
     openModal() {
-        this.container.classList.toggle('modal_active', true);
+        this.toggleClass(this.container, 'modal_active', true);
         this.events.emit('modal:open')
     }
 
     closeModal() {
-        this.container.classList.toggle('modal_active', false);
+        this.toggleClass(this.container, 'modal_active', false);
         this._content.innerHTML='';
         this.events.emit('modal:close')
     }

@@ -6,6 +6,7 @@ export interface IProduct {
     title: string;
     category: string;
     price: number;
+    index: number;
 };
   
 export interface ICartItem {

@@ -8,7 +8,7 @@ interface ICartView {
     selected: string[];
 }
 
-export class Cart extends View<ICartView> {
+export class Cart<T> extends View<ICartView> {
     protected _list: HTMLElement;
     protected _price: HTMLElement;
 	protected _button: HTMLElement;
@@ -36,14 +36,14 @@ export class Cart extends View<ICartView> {
 	set items(items: HTMLElement[]) {
 		if (items.length) {
 			this._list.replaceChildren(...items);
-            this.setDisabled(this._button, false);
+            this.toggleButton(true);
 		} else {
 			this._list.replaceChildren(
 				createElement<HTMLParagraphElement>('p', {
 					textContent: 'Корзина пуста',
 				})
 			);
-            this.setDisabled(this._button, true);
+            this.toggleButton(false);
 		}
 	}
 

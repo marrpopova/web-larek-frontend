@@ -46,9 +46,20 @@ export abstract class Component<T> {
         }
     }
 
-    // Вернуть корневой DOM-элемент
-    render(data?: Partial<T>): HTMLElement {
+    
+    render(data?: Partial<T & { index?: number }>): HTMLElement {
         Object.assign(this as object, data ?? {});
+    
+        // Обновляем индекс, если он передан
+        if (data?.index !== undefined) {
+            const indexElement = this.container.querySelector('.basket__item-index');
+            if (indexElement) {
+                indexElement.textContent = data.index.toString();
+            } else {
+                console.error('Элемент с классом .basket__item-index не найден');
+        }
+    }
+    
         return this.container;
     }
 }

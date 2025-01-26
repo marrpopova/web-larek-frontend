@@ -32,6 +32,6 @@ export class ProductView extends View<IProductView> {
         this._gallery.replaceChildren(...items);
     }
     set locked(value: boolean) {
-        this._wrapper.classList.toggle('page__wrapper_locked', value)
+        this.toggleClass(this._wrapper, 'page__wrapper_locked', value)
     }
 }

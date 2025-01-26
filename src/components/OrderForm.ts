@@ -26,8 +26,8 @@ export class OrderForm extends Form<IOrder> {
     }
 
     set paymentMethod(value: 'cash' | 'card') {
-        this._paymentMethodCard.classList.toggle('button_alt-active', value === 'card');
-        this._paymentMethodCash.classList.toggle('button_alt-active', value === 'card');
+        this.toggleClass(this._paymentMethodCard, 'button_alt-active', value === 'card');
+        this.toggleClass(this._paymentMethodCash, 'button_alt-active', value === 'cash');
     }
 
     set deliveryAddress(value: string) {
