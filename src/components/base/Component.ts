@@ -52,9 +52,9 @@ export abstract class Component<T> {
     
         // Обновляем индекс, если он передан
         if (data?.index !== undefined) {
-            const indexElement = this.container.querySelector('.basket__item-index');
+            const indexElement : HTMLElement = this.container.querySelector('.basket__item-index');
             if (indexElement) {
-                indexElement.textContent = data.index.toString();
+                this.setText(indexElement, data.index.toString())
             } else {
                 console.error('Элемент с классом .basket__item-index не найден');
         }
